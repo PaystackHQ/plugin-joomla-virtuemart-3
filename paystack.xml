@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<extension method="upgrade" group="vmpayment" type="plugin" version="2.5">
+    <name>SimplePay</name>
+    <creationDate>March 2016</creationDate>
+    <author>SimplePay Ltd</author>
+    <authorUrl>http://www.simplepay.ng</authorUrl>
+    <copyright>Copyright (C) 2016 SimplePay Ltd. All rights reserved.</copyright>
+    <license>MIT, see LICENSE</license>
+    <version>1.0.0</version>
+
+    <description>
+        <![CDATA[
+            Accept payments with Master Card, Visa and Verve. <a href="https://simplepay.ng/" target="_blank">Click here to sign up for a SimplePay account</a>.
+		]]>
+    </description>
+
+    <languages>
+        <language tag="en-GB">language/en-GB.plg_vmpayment_simplepay.ini</language>
+    </languages>
+
+    <files>
+        <folder>language</folder>
+        <filename plugin="simplepay">simplepay.php</filename>
+    </files>
+
+    <vmconfig>
+        <fields name="params">
+            <fieldset name="payment" addfieldpath="/plugins/vmpayment/simplepay/simplepay/fields">
+                <field name="test_mode"
+                       type="list"
+                       default="0"
+                       label="VMPAYMENT_SIMPLEPAY_TEST_MODE_LBL"
+                       description="VMPAYMENT_SIMPLEPAY_TEST_DESC">
+                    <option value="0">COM_VIRTUEMART_NO</option>
+                    <option value="1">COM_VIRTUEMART_YES</option>
+                </field>
+                <field type="vmtitle"
+                       description=""
+                       default="VMPAYMENT_SIMPLEPAY_SIMPLEPAY_CONF"/>
+                <field type="text"
+                       name="private_live_key"
+                       description="VMPAYMENT_SIMPLEPAY_PRIVATE_LIVE_KEY_DESC"
+                       default=""
+                       label="VMPAYMENT_SIMPLEPAY_PRIVATE_LIVE_KEY_LBL"
+                       size="50"/>
+                <field type="text"
+                       name="public_live_key"
+                       description="VMPAYMENT_SIMPLEPAY_PUBLIC_LIVE_KEY_DESC"
+                       default=""
+                       label="VMPAYMENT_SIMPLEPAY_PUBLIC_LIVE_KEY_LBL"
+                       size="50"/>
+                <field type="text"
+                       name="private_test_key"
+                       description="VMPAYMENT_SIMPLEPAY_PRIVATE_TEST_KEY_DESC"
+                       default=""
+                       label="VMPAYMENT_SIMPLEPAY_PRIVATE_TEST_KEY_LBL"
+                       size="50"/>
+                <field type="text"
+                       name="public_test_key"
+                       description="VMPAYMENT_SIMPLEPAY_PUBLIC_TEST_KEY_DESC"
+                       default=""
+                       label="VMPAYMENT_SIMPLEPAY_PUBLIC_TEST_KEY_LBL"
+                       size="50"/>
+                <field type="vmtitle"
+                       description=""
+                       default="VMPAYMENT_SIMPLEPAY_DIALOG_SETTINGS"/>
+                <field type="text"
+                       name="description"
+                       description="VMPAYMENT_SIMPLEPAY_DIALOG_DESCRIPTION_DESC"
+                       default=""
+                       label="VMPAYMENT_SIMPLEPAY_DIALOG_DESCRIPTION_LBL"
+                       size="100"/>
+                <field type="text"
+                       name="image_url"
+                       description="VMPAYMENT_SIMPLEPAY_DIALOG_IMAGE_DESC"
+                       default=""
+                       label="VMPAYMENT_SIMPLEPAY_DIALOG_IMAGE_LBL"/>
+            </fieldset>
+        </fields>
+    </vmconfig>
+
+    <updateservers>
+        <server type="extension" name="VirtueMart plg_vmpayment_simplepay Update Site">
+            <![CDATA[https://raw.githubusercontent.com/simplepay/simplepay-virtuemart/master/version.xml]]></server>
+    </updateservers>
+</extension>
