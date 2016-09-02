@@ -1,9 +1,9 @@
 <?php
 
 /**
- * @package       SimplePay
- * @author        SimplePay Ltd
- * @copyright     Copyright (C) 2016 SimplePay Ltd. All rights reserved.
+ * @package       Paystack
+ * @author        Paystack Ltd
+ * @copyright     Copyright (C) 2016 Paystack Ltd. All rights reserved.
  * @version       1.0.0, March 2016
  * @license       MIT, see LICENSE
  */
@@ -26,13 +26,13 @@ class plgVmPaymentSimplepay extends vmPSPlugin
         $this->tableFields = array_keys($this->getTableSQLFields());
 
         $varsToPush = array(
-            'test_mode' => array(0, 'int'), // simplepay.xml (test_mode)
-            'private_live_key' => array('', 'char'), // simplepay.xml (private_live_key)
-            'public_live_key' => array('', 'char'), // simplepay.xml (public_live_key)
-            'private_test_key' => array('', 'char'), // simplepay.xml (private_test_key)
-            'public_test_key' => array('', 'char'), // simplepay.xml (public_test_key)
-            'description' => array('', 'char'), // simplepay.xml (description)
-            'image_url' => array('', 'char'), // simplepay.xml (image_url)
+            'test_mode' => array(0, 'int'), // paystack.xml (test_mode)
+            'private_live_key' => array('', 'char'), // paystack.xml (private_live_key)
+            'public_live_key' => array('', 'char'), // paystack.xml (public_live_key)
+            'private_test_key' => array('', 'char'), // paystack.xml (private_test_key)
+            'public_test_key' => array('', 'char'), // paystack.xml (public_test_key)
+            'description' => array('', 'char'), // paystack.xml (description)
+            'image_url' => array('', 'char'), // paystack.xml (image_url)
 
             'status_pending' => array('', 'char'),
             'status_success' => array('', 'char'),
@@ -50,7 +50,7 @@ class plgVmPaymentSimplepay extends vmPSPlugin
 
     public function getVmPluginCreateTableSQL()
     {
-        return $this->createTableSQL('Payment SimplePay Table');
+        return $this->createTableSQL('Payment Paystack Table');
     }
 
     function getTableSQLFields()
@@ -66,36 +66,36 @@ class plgVmPaymentSimplepay extends vmPSPlugin
             'cost_per_transaction' => ' decimal(10,2) DEFAULT NULL ',
             'cost_percent_total' => ' decimal(10,2) DEFAULT NULL ',
             'tax_id' => 'smallint(11) DEFAULT NULL',
-            'simplepay_transaction_id' => 'char(32) DEFAULT NULL'
+            'paystack_transaction_id' => 'char(32) DEFAULT NULL'
         );
 
         return $SQLfields;
     }
 
-    function getSimplePaySettings($payment_method_id)
+    function getPaystackSettings($payment_method_id)
     {
-        $simplepay_settings = $this->getPluginMethod($payment_method_id);
+        $paystack_settings = $this->getPluginMethod($payment_method_id);
 
-        if ($simplepay_settings->test_mode) {
-            $private_key = $simplepay_settings->private_test_key;
-            $public_key = $simplepay_settings->public_test_key;
+        if ($paystack_settings->test_mode) {
+            $private_key = $paystack_settings->private_test_key;
+            $public_key = $paystack_settings->public_test_key;
         } else {
-            $private_key = $simplepay_settings->private_live_key;
-            $public_key = $simplepay_settings->public_live_key;
+            $private_key = $paystack_settings->private_live_key;
+            $public_key = $paystack_settings->public_live_key;
         }
 
         return array(
             'private_key' => $private_key,
             'public_key' => $public_key,
-            'description' => $simplepay_settings->description,
-            'image_url' => $simplepay_settings->image_url
+            'description' => $paystack_settings->description,
+            'image_url' => $paystack_settings->image_url
         );
     }
 
-    function verifySimplePayTransaction($token, $payment_method_id)
+    function verifyPaystackTransaction($token, $payment_method_id)
     {
         // Get Private API Key from settings
-        $simplepay_settings = $this->getSimplePaySettings($payment_method_id);
+        $paystack_settings = $this->getPaystackSettings($payment_method_id);
 
         $data = array(
             'token' => $token
@@ -103,8 +103,8 @@ class plgVmPaymentSimplepay extends vmPSPlugin
 
         $dataString = json_encode($data);
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, 'https://checkout.simplepay.ng/v1/payments/verify/');
-        curl_setopt($ch, CURLOPT_USERPWD, $simplepay_settings['private_key'] . ':');
+        curl_setopt($ch, CURLOPT_URL, 'https://checkout.paystack.ng/v1/payments/verify/');
+        curl_setopt($ch, CURLOPT_USERPWD, $paystack_settings['private_key'] . ':');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'POST');
         curl_setopt($ch, CURLOPT_POST, true);
@@ -169,7 +169,7 @@ class plgVmPaymentSimplepay extends vmPSPlugin
         $dbValues['tax_id'] = $method->tax_id;
         $this->storePSPluginInternalData($dbValues);
 
-        // Return URL - Verify SimplePay payment
+        // Return URL - Verify Paystack payment
         $return_url = JURI::root() .
             'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&on=' .
             $order['details']['BT']->order_number .
@@ -178,14 +178,14 @@ class plgVmPaymentSimplepay extends vmPSPlugin
             '&Itemid=' . vRequest::getInt('Itemid') .
             '&lang=' . vRequest::getCmd('lang', '');
 
-        // SimplePay Settings
+        // Paystack Settings
         $payment_method_id = vRequest::getInt('virtuemart_paymentmethod_id');
-        $simplepay_settings = $this->getSimplePaySettings($payment_method_id);
+        $paystack_settings = $this->getPaystackSettings($payment_method_id);
 
-        // SimplePay Gateway HTML code
+        // Paystack Gateway HTML code
         $html = '
         <p>Your order is being processed</p>
-        <script src="https://checkout.simplepay.ng/simplepay.js"></script>
+        <script src="https://checkout.paystack.ng/paystack.js"></script>
         <script type="text/javascript">
         function formatAmount(amount) {
             var strAmount = amount.toString().split(".");
@@ -207,7 +207,7 @@ class plgVmPaymentSimplepay extends vmPSPlugin
         var amount = formatAmount("' . $totalInPaymentCurrency['value'] . '");
 
         // Gateway dialog
-		var handler = SimplePay.configure({
+		var handler = Paystack.configure({
 			token: function(token) {
 			    var form = jQuery("<form />", { action: "' . $return_url . '", method: "POST" });
                 form.append(
@@ -216,12 +216,12 @@ class plgVmPaymentSimplepay extends vmPSPlugin
                 );
                 form.submit();
 			},
-			key: "' . $simplepay_settings['public_key'] . '",
+			key: "' . $paystack_settings['public_key'] . '",
 			platform: "VirtueMart",
-			image: "' . $simplepay_settings['image_url'] . '"
+			image: "' . $paystack_settings['image_url'] . '"
 		});
 
-        var customDescription = "' . $simplepay_settings['description'] . '";
+        var customDescription = "' . $paystack_settings['description'] . '";
         if (customDescription) {
             customDescription += " - Order #' . $order_info->order_number . '";
         } else {
@@ -241,7 +241,7 @@ class plgVmPaymentSimplepay extends vmPSPlugin
 		};
 
 		jQuery(function() {
-		    handler.open(SimplePay.CHECKOUT, paymentData);
+		    handler.open(Paystack.CHECKOUT, paymentData);
 		});
         </script>
         ';
@@ -291,7 +291,7 @@ class plgVmPaymentSimplepay extends vmPSPlugin
         $orderModel = VmModel::getModel('orders');
         $order = $orderModel->getOrder($virtuemart_order_id);
 
-        if ($this->verifySimplePayTransaction($post_data['token'], $post_data['payment_method_id'])) {
+        if ($this->verifyPaystackTransaction($post_data['token'], $post_data['payment_method_id'])) {
             // Update order status - From pending to complete
             $order['order_status'] = 'C';
             $order['customer_notified'] = 1;
