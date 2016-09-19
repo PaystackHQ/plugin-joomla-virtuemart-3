@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <extension method="upgrade" group="vmpayment" type="plugin" version="2.5">
-    <name>Paystack</name>
-    <creationDate>March 2016</creationDate>
+    <name>VM Payment - Paystack</name>
+    <creationDate>September 2016</creationDate>
     <author>Paystack Ltd</author>
-    <authorUrl>http://www.paystack.ng</authorUrl>
+    <authorUrl>http://www.paystack.com</authorUrl>
     <copyright>Copyright (C) 2016 Paystack Ltd. All rights reserved.</copyright>
     <license>MIT, see LICENSE</license>
     <version>1.0.0</version>
 
     <description>
         <![CDATA[
-            Accept payments with Master Card, Visa and Verve. <a href="https://paystack.com/" target="_blank">Click here to sign up for a Paystack account</a>.
+            Accept payments via Master Card, Visa and Verve. <a href="https://dashboard.paystack.com/" target="_blank">Click here to sign up for a Paystack account</a>.
 		]]>
     </description>
 
@@ -38,49 +38,35 @@
                        description=""
                        default="VMPAYMENT_PAYSTACK_PAYSTACK_CONF"/>
                 <field type="text"
-                       name="private_live_key"
-                       description="VMPAYMENT_PAYSTACK_PRIVATE_LIVE_KEY_DESC"
+                       name="live_secret_key"
+                       description="VMPAYMENT_PAYSTACK_LIVE_SECRET_KEY_DESC"
                        default=""
-                       label="VMPAYMENT_PAYSTACK_PRIVATE_LIVE_KEY_LBL"
+                       label="VMPAYMENT_PAYSTACK_LIVE_SECRET_KEY_LBL"
                        size="50"/>
                 <field type="text"
-                       name="public_live_key"
-                       description="VMPAYMENT_PAYSTACK_PUBLIC_LIVE_KEY_DESC"
+                       name="live_public_key"
+                       description="VMPAYMENT_PAYSTACK_LIVE_PUBLIC_KEY_DESC"
                        default=""
-                       label="VMPAYMENT_PAYSTACK_PUBLIC_LIVE_KEY_LBL"
+                       label="VMPAYMENT_PAYSTACK_LIVE_PUBLIC_KEY_LBL"
                        size="50"/>
                 <field type="text"
-                       name="private_test_key"
-                       description="VMPAYMENT_PAYSTACK_PRIVATE_TEST_KEY_DESC"
+                       name="test_secret_key"
+                       description="VMPAYMENT_PAYSTACK_TEST_SECRET_KEY_DESC"
                        default=""
-                       label="VMPAYMENT_PAYSTACK_PRIVATE_TEST_KEY_LBL"
+                       label="VMPAYMENT_PAYSTACK_TEST_SECRET_KEY_LBL"
                        size="50"/>
                 <field type="text"
-                       name="public_test_key"
-                       description="VMPAYMENT_PAYSTACK_PUBLIC_TEST_KEY_DESC"
+                       name="test_public_key"
+                       description="VMPAYMENT_PAYSTACK_TEST_PUBLIC_KEY_DESC"
                        default=""
-                       label="VMPAYMENT_PAYSTACK_PUBLIC_TEST_KEY_LBL"
+                       label="VMPAYMENT_PAYSTACK_TEST_PUBLIC_KEY_LBL"
                        size="50"/>
-                <field type="vmtitle"
-                       description=""
-                       default="VMPAYMENT_PAYSTACK_DIALOG_SETTINGS"/>
-                <field type="text"
-                       name="description"
-                       description="VMPAYMENT_PAYSTACK_DIALOG_DESCRIPTION_DESC"
-                       default=""
-                       label="VMPAYMENT_PAYSTACK_DIALOG_DESCRIPTION_LBL"
-                       size="100"/>
-                <field type="text"
-                       name="image_url"
-                       description="VMPAYMENT_PAYSTACK_DIALOG_IMAGE_DESC"
-                       default=""
-                       label="VMPAYMENT_PAYSTACK_DIALOG_IMAGE_LBL"/>
             </fieldset>
         </fields>
     </vmconfig>
 
     <updateservers>
         <server type="extension" name="VirtueMart plg_vmpayment_paystack Update Site">
-            <![CDATA[https://raw.githubusercontent.com/paystack/paystack-virtuemart/master/version.xml]]></server>
+            <![CDATA[https://raw.githubusercontent.com/Kendysond/Joomla-VirtueMart-Paystack/master/3.0/version.xml]]></server>
     </updateservers>
 </extension>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<updates>
+	<update>
+		<name>VM Payment - Paystack</name>
+		<description>
+			<![CDATA[
+				Accept payments via Master Card, Visa and Verve. <a href="https://dashboard.paystack.com/" target="_blank">Click here to sign up for a Paystack account</a>.
+			]]>
+		</description>
+		<element>paystack</element>
+		<type>plugin</type>
+		<version>1.0.1</version>
+		<infourl title="VirtueMart URL">
+			https://github.com/icepay/VirtueMart-3/releases/tag/1.0.0
+		</infourl>
+		<downloads>
+		<downloadurl type="upgrade" format="zip">
+			https://github.com/Kendysond/Joomla-VirtueMart-3-Paystack/releases/download/1.0.0/1.0.0.zip
+		</downloadurl>
+		</downloads>
+		<maintainer>Paystack</maintainer>
+		<maintainerurl>http://www.paystack.com</maintainerurl>
+	</update>
+<updates>
