@@ -1,11 +1,11 @@
 <?php
 
 /**
- * @package       Paystack
- * @author        Paystack Ltd
+ * @package       VM Payment - Paystack
+ * @author        Paystack
  * @copyright     Copyright (C) 2016 Paystack Ltd. All rights reserved.
- * @version       1.0.0, March 2016
- * @license       MIT, see LICENSE
+ * @version       1.0.0, September 2016
+ * @license       GNU General Public License version 2 or later; see LICENSE
  */
 
 defined('_JEXEC') or die('Direct access to ' . basename(__FILE__) . ' is not allowed.');
