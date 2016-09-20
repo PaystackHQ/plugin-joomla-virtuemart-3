@@ -281,7 +281,7 @@ class plgVmPaymentPaystack extends vmPSPlugin
               key: \'' . $paystack_settings['public_key'] . '\',
               email: \'' . $order_info->email . '\',
               amount: amount,
-              currency: \''.$method->payment_currency.'\',
+              currency: \''.$currency_code.'\',
               ref: \'' . $dbValues['paystack_transaction_reference'] . '\',
               callback: function(response){
           document.getElementById(\'paystack-pay-form\').submit();
