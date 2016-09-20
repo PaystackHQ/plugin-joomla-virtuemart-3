@@ -2,7 +2,7 @@
 <extension method="upgrade" group="vmpayment" type="plugin" version="2.5">
     <name>VM Payment - Paystack</name>
     <creationDate>September 2016</creationDate>
-    <author>Paystack Ltd</author>
+    <author>Paystack</author>
     <authorUrl>http://www.paystack.com</authorUrl>
     <copyright>Copyright (C) 2016 Paystack Ltd. All rights reserved.</copyright>
     <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
