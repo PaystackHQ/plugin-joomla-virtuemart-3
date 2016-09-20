@@ -214,9 +214,13 @@ class plgVmPaymentPaystack extends vmPSPlugin
 
         // Get payment currency
         $this->getPaymentCurrency($method);
-        $q = 'SELECT `currency_code_3` FROM `#__virtuemart_currencies` WHERE `virtuemart_currency_id`="' . $method->payment_currency . '" ';
-        $db =& JFactory::getDBO();
-        $db->setQuery($q);
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true)
+                    ->select($db->quoteName('currency_code_3'))
+                    ->from($db->quoteName('#__virtuemart_currencies'))
+                    ->where($db->quoteName('virtuemart_currency_id')
+                      . ' = '. $db->quote('\''.$method->payment_currency.'\''));
+        $db->setQuery($query);
         $currency_code = $db->loadResult();
 
         // Get total amount for the current payment currency
@@ -277,6 +281,7 @@ class plgVmPaymentPaystack extends vmPSPlugin
               key: \'' . $paystack_settings['public_key'] . '\',
               email: \'' . $order_info->email . '\',
               amount: amount,
+              currency: \''.$method->payment_currency.'\',
               ref: \'' . $dbValues['paystack_transaction_reference'] . '\',
               callback: function(response){
           document.getElementById(\'paystack-pay-form\').submit();
