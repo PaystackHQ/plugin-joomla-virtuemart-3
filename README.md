@@ -9,3 +9,14 @@ Paystack for Joomla VirtueMart
 6. Fill the form and select Payment Method: `VM Payment - Paystack` then `apply/save`. You may need to select all the available Shopper Groups.
 7. Click on the `Configuration` tab, fill the parameters from your [Paystack Dashboard](https://dashboard.paystack.com/#/settings/developer) and save.
 8. Please remember to set `Test Mode` to `No` when you are ready to start receiving payments.
+
+## Change Log
+
+Sept 21 2016 - v1.0.2
+- Fix issues found by JEDchecker
+- DS to DIRECTORY_SEPARATOR
+- Use GPL license
+- Use Currency code obtained and remove backticks from file
+
+Sep 19 2016 - v1.0.0
+- First Release
