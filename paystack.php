@@ -284,8 +284,11 @@ class plgVmPaymentPaystack extends vmPSPlugin
               currency: \''.$currency_code.'\',
               ref: \'' . $dbValues['paystack_transaction_reference'] . '\',
               callback: function(response){
-          document.getElementById(\'paystack-pay-form\').submit();
-      },
+                  document.getElementById(\'paystack-pay-form\').submit();
+              },
+              onClose: function(){
+                  document.getElementById(\'paystack-pay-form\').submit();
+              }
             });
             handler.openIframe();
           }
@@ -338,12 +341,20 @@ class plgVmPaymentPaystack extends vmPSPlugin
         $orderModel = VmModel::getModel('orders');
         $order      = $orderModel->getOrder($virtuemart_order_id);
 
+        $payment_name = $this->renderPluginName($method);
+        $html = '<table>' . "\n";
+        $html .= $this->getHtmlRow('Payment Name', $payment_name);
+        $html .= $this->getHtmlRow('Order Number', $order_number);
+
         $transData = $this->verifyPaystackTransaction($post_data['token'], $post_data['payment_method_id']);
         if (!property_exists($transData, 'error') && property_exists($transData, 'status') && ($transData->status === 'success') && (strpos($transData->reference, $order_number . "-") === 0)) {
             // Update order status - From pending to complete
             $order['order_status']      = 'C';
             $order['customer_notified'] = 1;
             $orderModel->updateStatusForOneOrder($order['details']['BT']->virtuemart_order_id, $order, TRUE);
+
+            $html .= $this->getHtmlRow('Total Amount', number_format($transData->amount/100, 2));
+            $html .= $this->getHtmlRow('Status', $transData->status);
 
             // Empty cart
             $cart = VirtueMartCart::getCart();
@@ -352,12 +363,15 @@ class plgVmPaymentPaystack extends vmPSPlugin
             return True;
         } else if (property_exists($transData, 'error')) {
             die($transData->error);
+        } else {
+            $html .= $this->getHtmlRow('Total Amount', number_format($transData->amount/100, 2));
+            $html .= $this->getHtmlRow('Status', $transData->status);
+            // Update order status - From pending to canceled
+            $order['order_status']      = 'X';
+            $order['customer_notified'] = 1;
+            $orderModel->updateStatusForOneOrder($order['details']['BT']->virtuemart_order_id, $order, TRUE);
         }
-
-        // Update order status - From pending to canceled
-        $order['order_status']      = 'X';
-        $order['customer_notified'] = 1;
-        $orderModel->updateStatusForOneOrder($order['details']['BT']->virtuemart_order_id, $order, TRUE);
+        $html .= '</table>' . "\n";
 
         return False;
     }
