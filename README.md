@@ -12,6 +12,10 @@ Paystack for Joomla VirtueMart
 
 ## Change Log
 
+Sept 25 2016 - v1.0.4
+- Canceling the inline popup redirects
+- Show HTML table after verification
+
 Sept 21 2016 - v1.0.2
 - Fix issues found by JEDchecker
 - DS to DIRECTORY_SEPARATOR

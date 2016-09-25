@@ -4,7 +4,7 @@
  * @package       VM Payment - Paystack
  * @author        Paystack
  * @copyright     Copyright (C) 2016 Paystack Ltd. All rights reserved.
- * @version       1.0.2, September 2016
+ * @version       1.0.4, September 2016
  * @license       GNU General Public License version 2 or later; see LICENSE
  */
 
