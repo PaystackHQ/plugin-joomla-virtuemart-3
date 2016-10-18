@@ -355,6 +355,10 @@ class plgVmPaymentPaystack extends vmPSPlugin
 
             $html .= $this->getHtmlRow('Total Amount', number_format($transData->amount/100, 2));
             $html .= $this->getHtmlRow('Status', $transData->status);
+            $html .= '</table>' . "\n";
+            // add order url
+            $url=JRoute::_('index.php?option=com_virtuemart&view=orders&layout=details&order_number='.$order_number,FALSE);
+            $html.='<a href="'.JRoute::_('index.php?option=com_virtuemart&view=orders&layout=details&order_number='.$order_number,FALSE).'" class="vm-button-correct">'.vmText::_('COM_VIRTUEMART_ORDER_VIEW_ORDER').'</a>';
 
             // Empty cart
             $cart = VirtueMartCart::getCart();
@@ -366,12 +370,14 @@ class plgVmPaymentPaystack extends vmPSPlugin
         } else {
             $html .= $this->getHtmlRow('Total Amount', number_format($transData->amount/100, 2));
             $html .= $this->getHtmlRow('Status', $transData->status);
+            $html .= '</table>' . "\n";
+            $html.='<a href="'.JRoute::_('index.php?option=com_virtuemart&view=cart',false).'" class="vm-button-correct">'.vmText::_('CART_PAGE').'</a>';
+
             // Update order status - From pending to canceled
             $order['order_status']      = 'X';
             $order['customer_notified'] = 1;
             $orderModel->updateStatusForOneOrder($order['details']['BT']->virtuemart_order_id, $order, TRUE);
         }
-        $html .= '</table>' . "\n";
 
         return False;
     }
