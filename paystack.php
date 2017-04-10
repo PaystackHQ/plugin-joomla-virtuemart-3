@@ -119,7 +119,8 @@ class plgVmPaymentPaystack extends vmPSPlugin
             $secret_key = $paystack_settings->live_secret_key;
             $public_key = $paystack_settings->live_public_key;
         }
-        
+        $secret_key = str_replace(' ', '', $secret_key);
+        $public_key = str_replace(' ', '', $public_key);
         return array(
             'secret_key' => $secret_key,
             'public_key' => $public_key
