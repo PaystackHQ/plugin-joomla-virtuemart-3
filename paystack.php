@@ -4,7 +4,7 @@
  * @package       VM Payment - Paystack
  * @author        Paystack
  * @copyright     Copyright (C) 2016 Paystack Ltd. All rights reserved.
- * @version       1.0.4, September 2016
+ * @version       1.0.5, September 2016
  * @license       GNU General Public License version 2 or later; see LICENSE
  */
 
@@ -246,7 +246,7 @@ class plgVmPaymentPaystack extends vmPSPlugin
         $return_url = JURI::root() . 'index.php?option=com_virtuemart&view=pluginresponse&task=pluginresponsereceived&on=' . $order['details']['BT']->order_number . '&pm=' . $order['details']['BT']->virtuemart_paymentmethod_id . '&Itemid=' . vRequest::getInt('Itemid') . '&lang=' . vRequest::getCmd('lang', '');
 
         // Paystack Settings
-        $payment_method_id = vRequest::getInt('virtuemart_paymentmethod_id');
+        $payment_method_id = $dbValues['virtuemart_paymentmethod_id'];//vRequest::getInt('virtuemart_paymentmethod_id');
         $paystack_settings = $this->getPaystackSettings($payment_method_id);
 
         // Paystack Gateway HTML code

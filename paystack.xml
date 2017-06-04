@@ -6,7 +6,7 @@
     <authorUrl>http://www.paystack.com</authorUrl>
     <copyright>Copyright (C) 2016 Paystack Ltd. All rights reserved.</copyright>
     <license>http://www.gnu.org/copyleft/gpl.html GNU/GPL</license>
-    <version>1.0.4</version>
+    <version>1.0.5</version>
 
     <description>
         <![CDATA[
@@ -38,18 +38,6 @@
                        description=""
                        default="VMPAYMENT_PAYSTACK_PAYSTACK_CONF"/>
                 <field type="text"
-                       name="live_secret_key"
-                       description="VMPAYMENT_PAYSTACK_LIVE_SECRET_KEY_DESC"
-                       default=""
-                       label="VMPAYMENT_PAYSTACK_LIVE_SECRET_KEY_LBL"
-                       size="50"/>
-                <field type="text"
-                       name="live_public_key"
-                       description="VMPAYMENT_PAYSTACK_LIVE_PUBLIC_KEY_DESC"
-                       default=""
-                       label="VMPAYMENT_PAYSTACK_LIVE_PUBLIC_KEY_LBL"
-                       size="50"/>
-                <field type="text"
                        name="test_secret_key"
                        description="VMPAYMENT_PAYSTACK_TEST_SECRET_KEY_DESC"
                        default=""
@@ -60,6 +48,18 @@
                        description="VMPAYMENT_PAYSTACK_TEST_PUBLIC_KEY_DESC"
                        default=""
                        label="VMPAYMENT_PAYSTACK_TEST_PUBLIC_KEY_LBL"
+                       size="50"/>
+                <field type="text"
+                       name="live_secret_key"
+                       description="VMPAYMENT_PAYSTACK_LIVE_SECRET_KEY_DESC"
+                       default=""
+                       label="VMPAYMENT_PAYSTACK_LIVE_SECRET_KEY_LBL"
+                       size="50"/>
+                <field type="text"
+                       name="live_public_key"
+                       description="VMPAYMENT_PAYSTACK_LIVE_PUBLIC_KEY_DESC"
+                       default=""
+                       label="VMPAYMENT_PAYSTACK_LIVE_PUBLIC_KEY_LBL"
                        size="50"/>
             </fieldset>
         </fields>
