@@ -283,7 +283,7 @@ class plgVmPaymentPaystack extends vmPSPlugin
             var handler = PaystackPop.setup({
               key: \'' . $paystack_settings['public_key'] . '\',
               email: \'' . $order_info->email . '\',
-              amount: amount,
+              amount: amount * 100,
               currency: \''.$currency_code.'\',
               ref: \'' . $dbValues['paystack_transaction_reference'] . '\',
               callback: function(response){

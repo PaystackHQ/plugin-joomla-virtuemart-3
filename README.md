@@ -11,6 +11,8 @@ Paystack for Joomla VirtueMart
 8. Please remember to set `Test Mode` to `No` when you are ready to start receiving payments.
 
 ## Change Log
+Mar 14 2018 - v1.0.5
+- Fix amounts being displayed in kobo
 
 Sept 25 2016 - v1.0.4
 - Canceling the inline popup redirects
