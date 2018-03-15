@@ -67,6 +67,6 @@
 
     <updateservers>
         <server type="extension" name="VirtueMart plg_vmpayment_paystack Update Site">
-            <![CDATA[https://raw.githubusercontent.com/Kendysond/Joomla-VirtueMart-3-Paystack/master/version.xml]]></server>
+            <![CDATA[https://raw.githubusercontent.com/PaystackHQ/Joomla-VirtueMart-3-Paystack/master/version.xml]]></server>
     </updateservers>
 </extension>
