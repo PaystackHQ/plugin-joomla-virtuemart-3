@@ -200,7 +200,6 @@ class plgVmPaymentPaystack extends vmPSPlugin
         if (!($method = $this->getVmPluginMethod($order['details']['BT']->virtuemart_paymentmethod_id))) {
             return null;
         }
-
         if (!$this->selectedThisElement($method->payment_element)) {
             return false;
         }
@@ -215,14 +214,16 @@ class plgVmPaymentPaystack extends vmPSPlugin
         $order_info   = $order['details']['BT'];
         $country_code = ShopFunctions::getCountryByID($order_info->virtuemart_country_id, 'country_3_code');
 
+        
         // Get payment currency
         $this->getPaymentCurrency($method);
         $db = JFactory::getDbo();
-        $query = $db->getQuery(true)
-                    ->select($db->quoteName('currency_code_3'))
-                    ->from($db->quoteName('#__virtuemart_currencies'))
-                    ->where($db->quoteName('virtuemart_currency_id')
-                      . ' = '. $db->quote('\''.$method->payment_currency.'\''));
+        $query = $db->getQuery(true);
+        $query
+            ->select('currency_code_3')
+            ->from($db->quoteName('#__virtuemart_currencies'))
+            ->where($db->quoteName('virtuemart_currency_id')
+                . ' = '. $db->quote($method->payment_currency));
         $db->setQuery($query);
         $currency_code = $db->loadResult();
 
@@ -248,7 +249,6 @@ class plgVmPaymentPaystack extends vmPSPlugin
         // Paystack Settings
         $payment_method_id = $dbValues['virtuemart_paymentmethod_id'];//vRequest::getInt('virtuemart_paymentmethod_id');
         $paystack_settings = $this->getPaystackSettings($payment_method_id);
-
         // Paystack Gateway HTML code
         $html = '
         <p>Your order is being processed. Please wait...</p>
