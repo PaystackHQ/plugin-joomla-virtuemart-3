@@ -286,6 +286,15 @@ class plgVmPaymentPaystack extends vmPSPlugin
               amount: amount,
               currency: \''.$currency_code.'\',
               ref: \'' . $dbValues['paystack_transaction_reference'] . '\',
+              metadata: {
+                custom_fields: [
+                    {
+                      display_name: "Plugin",
+                      variable_name: "plugin",
+                      value: "pstk-virtuemart"
+                    }
+                ]
+              },
               callback: function(response){
                   document.getElementById(\'paystack-pay-form\').submit();
               },
