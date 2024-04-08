@@ -4,7 +4,7 @@
 Welcome to the Paystack Joomla Virtuemart plugin repository on GitHub. 
 Here you can browse the source code, look at open issues and keep track of development.
 
-## **Deprecation Notice**
+## :warning: **Deprecation Notice**
 
 We regret to inform you that the Joomla Virtuemart Plugin is now deprecated and will no longer be actively maintained or supported.
 
